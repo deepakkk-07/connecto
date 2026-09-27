@@ -7,12 +7,16 @@ import authRoutes from "./routes/auth.routes.js";
 
 import msgRoutes from "./routes/message.route.js";
 
+import { connectDB } from "./lib/db.js";
+
 dotenv.config();
 
 const app = express();
 const __dirname = path.resolve();
 
 const PORT = process.env.PORT || 3000;
+
+app.use(express.json());
 
 app.use("/api/auth", authRoutes);
 app.use("/message", msgRoutes);
@@ -25,4 +29,7 @@ if (process.env.NODE_ENV === "production") {
     res.sendFile(path.join(__dirname, "../frontend/dist/index.html"));
   });
 }
-app.listen(PORT, () => console.log("server running on http://localhost:3000/"));
+app.listen(PORT, () => {
+  console.log("server running on http://localhost:3000/");
+  connectDB();
+});
