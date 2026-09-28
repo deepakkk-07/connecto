@@ -4,7 +4,7 @@ import bcrypt from "bcryptjs";
 dotenv.config();
 
 import User from "../models/user.js";
-import { generateToken } from "../lib/uitls.js";
+import { generateToken } from "../lib/utils.js";
 
 export const signup = async (req, res) => {
   const { fullName, email, password } = req.body;
