@@ -2,6 +2,7 @@ import bcrypt from "bcryptjs";
 import User from "../models/user.js";
 import { generateToken } from "../lib/utils.js";
 import { sendWelcomeEmail } from "../emails/emailHandlers.js";
+import { arcjetProtection } from "../middleware/arcjet.middleware.js";
 import { ENV } from "../lib/env.js";
 import cloudinary from "../lib/cloudinary.js";
 
