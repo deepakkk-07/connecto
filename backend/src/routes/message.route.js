@@ -1,8 +1,18 @@
 import express from "express";
+// import { protecRout } from "../";
+import {
+  getAllContacts,
+  getChatPartners,
+  getMessagesByUserId,
+  sendMessage,
+} from "../controllers/message.controllers.js";
+import { protectRoute } from "../middleware/auth.middleware.js";
 
 const router = express.Router();
 
-router.get("/send", (req, res) => {
-  res.send("message end point");
-});
+router.get("/contacts", protectRoute, getAllContacts);
+router.get("/chats", protectRoute, getChatPartners);
+router.get("/:id", protectRoute, getMessagesByUserId);
+router.get("/send/:id", protectRoute, sendMessage);
+
 export default router;
