@@ -2,179 +2,34 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
-  box-sizing: border-box;
+@property --border-angle {
+  inherits: false;
+  initial-value: 0deg;
+  syntax: "<angle>";
 }
 
-html,
-body,
-#root {
-  margin: 0;
-  min-height: 100%;
+.input {
+  @apply w-full bg-slate-800/50 border border-slate-700 rounded-lg py-2 pl-10 pr-4 text-slate-200 placeholder-slate-400 focus:ring-2 focus:ring-cyan-500 focus:border-transparent;
 }
 
-body {
-  min-height: 100vh;
-  overflow-x: hidden;
-  background: #070b17;
-  color: white;
+.auth-input-icon {
+  @apply absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 size-5;
 }
 
-/* ============================= */
-/* PREMIUM WEBSITE BACKGROUND */
-/* ============================= */
-
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: -2;
-
-  background:
-    radial-gradient(
-      circle at 10% 10%,
-      rgba(59, 130, 246, 0.18),
-      transparent 25%
-    ),
-    radial-gradient(
-      circle at 90% 15%,
-      rgba(139, 92, 246, 0.2),
-      transparent 28%
-    ),
-    radial-gradient(
-      circle at 80% 90%,
-      rgba(14, 165, 233, 0.15),
-      transparent 30%
-    ),
-    radial-gradient(
-      circle at 15% 85%,
-      rgba(168, 85, 247, 0.12),
-      transparent 25%
-    ),
-    #070b17;
+.auth-input-label {
+  @apply block text-sm font-medium text-slate-300 mb-2;
 }
 
-/* ============================= */
-/* AURORA GLOW */
-/* ============================= */
-
-body::after {
-  content: "";
-  position: fixed;
-  width: 700px;
-  height: 700px;
-
-  left: 50%;
-  top: 45%;
-
-  transform: translate(-50%, -50%);
-
-  background: conic-gradient(
-    from 0deg,
-    rgba(59, 130, 246, 0.08),
-    rgba(168, 85, 247, 0.12),
-    rgba(6, 182, 212, 0.08),
-    rgba(59, 130, 246, 0.08)
-  );
-
-  border-radius: 50%;
-  filter: blur(90px);
-
-  animation: aurora 12s ease-in-out infinite;
-
-  z-index: -1;
-  pointer-events: none;
+.auth-badge {
+  @apply inline-flex items-center px-3 py-1 text-xs font-medium rounded-full bg-cyan-500/20 text-cyan-300;
 }
 
-@keyframes aurora {
-  0% {
-    transform: translate(-50%, -50%) rotate(0deg) scale(1);
-  }
-
-  50% {
-    transform: translate(-50%, -50%) rotate(180deg) scale(1.2);
-  }
-
-  100% {
-    transform: translate(-50%, -50%) rotate(360deg) scale(1);
-  }
+.auth-btn {
+  @apply w-full bg-cyan-500 text-white rounded-lg py-2.5 font-medium
+  hover:bg-cyan-600 focus:ring-2 focus:ring-cyan-500;
 }
 
-/* ============================= */
-/* SUBTLE GRID */
-/* ============================= */
-
-#root {
-  position: relative;
-}
-
-#root::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
-
-  background-size: 60px 60px;
-
-  mask-image: radial-gradient(ellipse at center, black 20%, transparent 80%);
-
-  pointer-events: none;
-  z-index: -1;
-}
-
-/* ============================= */
-/* FLOATING LIGHTS */
-/* ============================= */
-
-#root::after {
-  content: "";
-  position: fixed;
-
-  width: 8px;
-  height: 8px;
-
-  left: 20%;
-  top: 25%;
-
-  border-radius: 50%;
-
-  background: #60a5fa;
-
-  box-shadow:
-    0 0 15px #60a5fa,
-    0 0 35px rgba(96, 165, 250, 0.7);
-
-  animation: particle 7s ease-in-out infinite;
-
-  pointer-events: none;
-}
-
-@keyframes particle {
-  0% {
-    transform: translate(0, 0);
-    opacity: 0.3;
-  }
-
-  25% {
-    transform: translate(250px, 100px);
-    opacity: 1;
-  }
-
-  50% {
-    transform: translate(500px, -50px);
-    opacity: 0.5;
-  }
-
-  75% {
-    transform: translate(300px, 250px);
-    opacity: 1;
-  }
-
-  100% {
-    transform: translate(0, 0);
-    opacity: 0.3;
-  }
+.auth-link {
+  @apply px-4 py-2 inline-block bg-cyan-500/10 rounded-lg text-cyan-400
+  hover:text-cyan-500 text-sm transition-colors;
 }
