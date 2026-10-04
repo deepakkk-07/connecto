@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useAuthStore } from "../store/useAuthStore";
-import BorderAnimatedContainer from "../components/BOrderAnimatedContainer";
+import BorderAnimatedContainer from "../components/BorderAnimatedContainer";
 import {
   MessageCircleIcon,
   LockIcon,
