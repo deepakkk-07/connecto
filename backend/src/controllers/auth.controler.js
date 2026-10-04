@@ -1,5 +1,5 @@
 import bcrypt from "bcryptjs";
-import User from "../models/user.js";
+import User from "../models/User.js";
 import { generateToken } from "../lib/utils.js";
 import { sendWelcomeEmail } from "../emails/emailHandlers.js";
 import { arcjetProtection } from "../middleware/arcjet.middleware.js";
@@ -123,7 +123,7 @@ export const updateProfile = async (req, res) => {
         new: true,
       },
     );
-    res.status(200).json({ message: "updatedUser" });
+    res.status(200).json(updatedUser);
   } catch (error) {
     console.log("Error in updated profile:", error);
     res.status(500).json({ message: "Internal server error" });

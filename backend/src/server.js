@@ -5,21 +5,22 @@ import path from "path";
 import { ENV } from "./lib/env.js";
 import cors from "cors";
 import authRoutes from "./routes/auth.routes.js";
+import { app, server } from "./lib/socket.js";
 
 import msgRoutes from "./routes/message.route.js";
 
 import { connectDB } from "./lib/db.js";
 
-const app = express();
 const __dirname = path.resolve();
 
 const PORT = ENV.PORT || 3000;
 
-app.use(express.json());
+app.use(express.json({ limit: "5mb" })); // req.body
+
 app.use(cors({ origin: ENV.CLIENT_URL, credentials: true }));
 app.use(cookieParser());
 app.use("/api/auth", authRoutes);
-app.use("/message", msgRoutes);
+app.use("/api/messages", msgRoutes);
 
 // make ready for development
 if (ENV.NODE_ENV === "production") {
@@ -29,7 +30,7 @@ if (ENV.NODE_ENV === "production") {
     res.sendFile(path.join(__dirname, "../frontend/dist/index.html"));
   });
 }
-app.listen(PORT, () => {
+server.listen(PORT, () => {
   console.log("server running on http://localhost:3000/");
   connectDB();
 });
