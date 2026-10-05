@@ -34,7 +34,7 @@ export const getMessagesByUserId = async (req, res) => {
           receiverId: myId,
         },
       ],
-    });
+    }).sort({createdAt:1});
 
     res.status(200).json(messages);
   } catch (error) {
@@ -117,7 +117,7 @@ export const getChatPartners = async (req, res) => {
 
     const messages = await Message.find({
       $or: [{ senderId: loggedInUserId }, { receiverId: loggedInUserId }],
-    });
+    }).sort({createdAt:-1});
 
     const chatPartnersIds = [
       ...new Set(
@@ -129,9 +129,13 @@ export const getChatPartners = async (req, res) => {
       ),
     ];
 
-    const chatPartners = await User.find({
+      const users = await User.find({
       _id: { $in: chatPartnersIds },
     }).select("-password");
+
+    const chatPartners = chatPartnersIds
+      .map((id) => users.find((u) => u._id.toString() === id))
+      .filter(Boolean);
 
     res.status(200).json(chatPartners);
   } catch (error) {
