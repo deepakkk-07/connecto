@@ -43,6 +43,14 @@ export const useChatStore = create((set, get) => ({
       set({ isUsersLoading: false });
     }
   },
+    refreshChats: async () => {
+    try {
+      const res = await axiosInstance.get("/messages/chats");
+      set({ chats: res.data });
+    } catch (error) {
+      console.log("Error refreshing chats:", error);
+    }
+  },
 
   getMessagesByUserId: async (userId) => {
     set({ isMessagesLoading: true });
@@ -80,6 +88,7 @@ export const useChatStore = create((set, get) => ({
         messageData,
       );
       set({ messages: messages.concat(res.data) });
+      get().refreshChats();
     } catch (error) {
       // remove optimistic message on failure
       set({ messages: messages });
@@ -94,6 +103,7 @@ export const useChatStore = create((set, get) => ({
     const socket = useAuthStore.getState().socket;
 
     socket.on("newMessage", (newMessage) => {
+            get().refreshChats();
       const isMessageSentFromSelectedUser =
         newMessage.senderId === selectedUser._id;
       if (!isMessageSentFromSelectedUser) return;
